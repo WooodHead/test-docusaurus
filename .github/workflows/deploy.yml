@@ -7,9 +7,13 @@ on:
     branches:
       - master
     paths:
-      - '.github/workflows/deploy.yml'
-      - 'website/**'
-
+      - ".github/workflows/deploy.yml"
+      - "website/**"
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: "Log level"
+        default: "warning"
 env:
   WORKDIR: website
 
@@ -42,7 +46,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: "12.x"
 
       - name: Get yarn cache
         id: yarn-cache
@@ -64,5 +68,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./${{ env.WORKDIR }}/build
-          cname: 'test-docusaurus.peaceiris.com'
+          cname: "test-docusaurus.peaceiris.com"
           allow_empty_commit: true
